@@ -1,5 +1,6 @@
 package com.coutodev.sistema.de.despesas.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +23,7 @@ public class Despesa {
     private String titulo;
     private Double valor;
     private String categoria;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate data;
+
 }
