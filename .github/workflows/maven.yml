@@ -1,0 +1,35 @@
+name: Java CI
+
+on:
+  push:
+    branches: [ '*' ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [17, 21]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java-version }}
+
+      - name: Permissão Maven
+        run: chmod +x mvnw
+
+      - name: Ver arquivos
+        run: ls
+
+      - name: Rodar testes
+        run: ./mvnw test
+
+      - name: Build
+        run: ./mvnw clean package
